@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trivia</title>
+</head>
+<body>
+    <h1>Trivia Night</h1>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+
+        $.get("https://opentdb.com/api.php?amount=15&type=multiple", displayQuestions)
+        function displayQuestions(data) {
+            results = data.results;
+            for (let i = 0; i < results.length; i++) {
+                answers = results[i].incorrect_answers;
+                answers.push(results[i].correct_answer);
+                answers.sort();
+                $('h1').append('<h2>Category:</h2><p>'
+                    + results[i].category 
+                    + '</p><h2>Question:</h2><p>'
+                    + results[i].question
+                    + '</p><h2>Answers:</h2><ul>');
+                for (let j = 0; j < answers.length; j++){
+                    $('h1').append('<li>' + answers[j] + '</li>');
+                }
+                $('h1').append('</ul>');
+            }
+        }
+    </script>
+</body>
+</html>
