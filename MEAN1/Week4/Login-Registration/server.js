@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('express-flash');
+const bcrypt = require('bcrypt-as-promised');
 mongoose.connect('mongodb://localhost/messageboard');
 const app = express();
 
@@ -34,43 +35,85 @@ app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    Message.find({}).then((messages) => {
-        res.render("messages", { title: "Message Board", all_messages: messages });
-    }).catch((error) => {
-        console.log("Error: ", error);
-    });
+    if (req.session.userID){
+        res.redirect("/users");
+    } else {
+        res.render("index");
+    }
+});
+
+app.get('/users', (req, res) => {
+    if (req.session.userID){
+        User.findById(req.session.userID).then( user => {
+            res.render("users", { user: user });
+        }).catch( error => {
+            console.log("Error: ", error);
+            res.redirect('/');
+        });
+    } else {
+        res.redirect("/");
+    }
 });
 
 app.post('/users/new', (req, res) => {
-    User.create(req.body).then((user) => {
-        
-        res.redirect("/");
-    }).catch((error) => {
-        console.log("Error: ", error);
-        for (let key in error.errors) {
-            req.flash('messages', err.errors[key].message)
+    User.findOne({ email: req.body.email }).then( found_user => {
+        if (found_user) {
+            req.flash('newUser', "A user with that email already exists!");
+            res.redirect('/');
         }
-        res.redirect("/");
+    }).catch( error => {
+        console.log(error);
+        req.flash('newUser', "A user with that email already exists!");
+        res.redirect('/');
+    });
+    bcrypt.hash(req.body.password, 10).then( hashed_password => {
+        req.body.password = hashed_password;
+        User.create(req.body).then( user => {
+            req.session.userID = user.id;
+            res.redirect("/users");
+        }).catch( error => {
+            console.log("Error: ", error);
+            for (let key in error.errors) {
+                req.flash('newUser', error.errors[key].message);
+            }
+            res.redirect("/");
+        });
+    }).catch( error => {
+        console.log("Error: ", error);
     });
 });
 
-app.post('/messages/:id/comments/new', (req, res) => {
-    Comment.create(req.body).then((comment) => {
-        Message.findById(req.params.id).then((message) => {
-            message.comments.push(comment);
-            message.save().then(() => {
+app.post('/login', (req, res) => {
+    User.findOne({ email: req.body.email }).then( user => {
+        if (!user) {
+            req.flash('login', "That email does not match any entry in our database.");
+            res.redirect('/');
+        }
+        bcrypt.compare(req.body.password, user.password).then( result => {
+            if (result) {
+                req.session.userID = user.id;
+                res.redirect("/users");
+            } else {
+                req.flash('login', "That password does not match the one in our database.");
                 res.redirect("/");
-            });
-        }).catch((error) => {
+            }
+        }).catch( error => {
             console.log("Error: ", error);
+            req.flash('login', "That password does not match the one in our database.");
+            res.redirect("/");
         });
     }).catch((error) => {
         console.log("Error: ", error);
         for (let key in error.errors) {
-            req.flash('comments', err.errors[key].message)
+            req.flash('login', error.errors[key].message)
         }
         res.redirect("/");
     });
+});
+
+app.post('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
 });
 
 app.listen(8000, () => {
