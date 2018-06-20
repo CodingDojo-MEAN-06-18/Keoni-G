@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/style.css" />
+</head>
+<body>
+    <h1><%= cuttlefish.name %></h1>
+    <ul id="single">
+        <li class="data">Favorite Color: <%= cuttlefish.color %></li>
+        <li class="data">Favorite Food: <%= cuttlefish.food %></li>
+        <li class="data">Birthday: <%= cuttlefish.birthday %></li>
+    </ul>
+    <form action="/cuttlefish/edit/<%= cuttlefish.id %>" method="get">
+        <input type="submit" value="Edit Cuttlefish">
+    </form>
+    <form action="/cuttlefish/destroy/<%= cuttlefish.id %>" method="post">
+        <input type="submit" value="Delete Cuttlefish">
+    </form>
+    <form action="/" method="get">
+        <input type="submit" value="Go Back">
+    </form>
+</body>
+</html>
