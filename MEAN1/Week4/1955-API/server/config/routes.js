@@ -1,15 +1,20 @@
-const quotes = require('../controllers/quotes.js')
+const users = require('../controllers/users.js')
 
 module.exports = function(app){
     app.get('/', function(req, res) {
-        quotes.index(req, res);
+        users.get_all(req, res);
+    });
+
+    app.get('/:name', function(req, res) {
+        users.get_one(req, res);
     });
     
-    app.post('/quotes', function(req, res) {
-        quotes.post_quote(req, res);
+    app.get('/new/:name', function(req, res) {
+        users.add_one(req, res);
     });
     
-    app.get('/quotes', function(req, res) {
-        quotes.get_quotes(req, res);
+    app.get('/remove/:name', function(req, res) {
+        users.remove_one(req, res);
     });
+    
 } 

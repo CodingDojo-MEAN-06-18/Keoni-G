@@ -3,7 +3,7 @@ const mongoose = require('mongoose'),
     reg = new RegExp('\\.js$', 'i'),
     fs = require("fs"),
     modelsPath = path.resolve('server/models');
-mongoose.connect('mongodb://localhost/quoting_dojo');
+mongoose.connect('mongodb://localhost/1955');
 
 fs.readdirSync(modelsPath).forEach(file => {
     if (reg.test(file)){
