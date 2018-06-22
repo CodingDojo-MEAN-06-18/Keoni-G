@@ -1,5 +1,5 @@
-function Ninja(name) {
-    this.name = name ? name : "Anonymous";
+function Ninja(name = "Anonymous") {
+    this.name = name;
     this.health = 100;
     var speed = 3;
     var strength = 3;

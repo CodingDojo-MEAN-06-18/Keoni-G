@@ -1,6 +1,6 @@
 class Ninja {
-    constructor(name) {
-        this.name = name ? name : "Unknown Ninja";
+    constructor(name = "Unknown Ninja") {
+        this.name = name;
         this.health = 100;
         this.speed = 3;
         this.strength = 3;
