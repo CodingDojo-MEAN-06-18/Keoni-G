@@ -1,0 +1,28 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.brown {
+    height: 80px;
+    width: 80px;
+    background-color: brown;
+    margin: 0px 10px 10px 0px;
+    display: inline-block;
+    color: white;
+    line-height: 2em;
+}
+
+.on, .off {
+    height: 50%;
+    width: 50%;
+    margin: 22.5%;
+    border: 1px solid black;
+}
+
+.on {
+    background-color: green;
+}
+
+.off {
+    background-color: red;
+}
