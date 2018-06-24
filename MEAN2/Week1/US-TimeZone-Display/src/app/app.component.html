@@ -1,0 +1,22 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    {{ title }}
+  </h1>
+</div>
+<h2>Standard Time:</h2>
+<div style="text-align:center">
+  <button *ngFor="let zone of sTimeZones" (click)="onButtonClick($event, zone.offset)">
+    {{ zone.abbr }}
+  </button>
+</div>
+<h2>Daylight Time:</h2>
+<div style="text-align:center">
+  <button *ngFor="let zone of dTimeZones" (click)="onButtonClick($event, zone.offset)" >
+    {{ zone.abbr }}
+  </button>
+</div>
+<div style="text-align:center">
+  <button (click)="clear($event)">CLEAR</button>
+</div>
+<h1>{{ time.toLocaleTimeString() }}</h1>
