@@ -1,0 +1,32 @@
+<h1>{{ title }}</h1>
+<div class="success" *ngIf="formData.submitted && users[0]">
+  <p>Thank you for registering with us {{ users[users.length - 1].firstName }}! We just sent you a confirmation email at: <a>{{ users[users.length - 1].email }}</a>, and we will send all mail to {{ users[users.length - 1].street }} {{ users[users.length - 1].apt}}, {{ users[users.length - 1].city }}, {{ users[users.length - 1].state }}.</p>
+  <p>Have a wonderful day!</p>
+</div>
+<form #formData="ngForm" (submit)="onSubmit($event, formData)">
+  <h2>Account Information</h2>
+  <input type="text" name="firstName" required [(ngModel)]="user.firstName" #firstName="ngModel" placeholder="First Name *">
+  <span *ngIf="firstName.errors && firstName.touched"> First name is required.</span>
+  <input type="text" name="lastName" required [(ngModel)]="user.lastName" #lastName="ngModel" placeholder="Last Name *">
+  <span *ngIf="lastName.errors && lastName.touched"> Last name is required.</span>
+  <input type="text" name="email" required [(ngModel)]="user.email" #email="ngModel" placeholder="Email *" pattern='^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$'>
+  <span *ngIf="email.errors && email.touched"> A valid email is required.</span>
+  <input type="password" name="password" required [(ngModel)]="user.password" #password="ngModel" placeholder="Password *">
+  <span *ngIf="password.errors && password.touched"> Password is required.</span>
+  <input type="password" name="confirm" required [(ngModel)]="user.confirm" #confirm="ngModel" placeholder="Confirm Password *">
+  <span *ngIf="confirm.touched && (password.value !== confirm.value)"> Passwords must match.</span>
+  <input type="text" name="street" required [(ngModel)]="user.street" #street="ngModel" placeholder="Street Address *">
+  <span *ngIf="street.errors && street.touched"> Street address is required.</span>
+  <input type="text" name="apt" [(ngModel)]="user.apt" #apt="ngModel" placeholder="Unit/Apt#">
+  <input type="text" name="city" required [(ngModel)]="user.city" #city="ngModel" placeholder="City *">
+  <span *ngIf="city.errors && city.touched"> City is required.</span>
+  <select name="state" required [(ngModel)]="user.state" #state="ngModel">
+    <option *ngFor="let state of states" value="{{ state }}">{{ state }}</option>
+  </select>
+  <div class="radio">
+    <label for="lucky">I'm feeling lucky*: </label>
+    <input type="radio" name="lucky" [(ngModel)]="user.lucky" #lucky="ngModel" value="true">Yes
+    <input type="radio" name="lucky" [(ngModel)]="user.lucky" #lucky="ngModel" value="false">No
+  </div>
+  <input [disabled]="formData.invalid" type="submit" value="Register">
+</form>
