@@ -15,7 +15,7 @@ export class BetaComponent implements OnInit {
     this.numbers = this._taskService.retrieveBottomNumbers();
   }
 
-  addNumber(event){
+  addNumber(event: Event){
     event.preventDefault();
     this._taskService.addNumberToBottom(Math.floor(Math.random() * 100));
   }
