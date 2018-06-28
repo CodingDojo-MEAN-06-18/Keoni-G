@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class TaskService {
   private topNumbers: number[] = [];
   private bottomNumbers: number[] = [];
-  private differences: number[] = [];
+  differences: BehaviorSubject<number[]> = new BehaviorSubject([]);
   constructor() { }
 
   retrieveTopNumbers(): number[] {
@@ -15,23 +16,10 @@ export class TaskService {
   retrieveBottomNumbers(): number[] {
     return this.bottomNumbers;
   }
-  retrieveDifferences(): number[] {
-    return this.differences;
-  }
   addNumberToTop(num: number) {
     this.topNumbers.push(num);
   }
   addNumberToBottom(num: number) {
     this.bottomNumbers.push(num);
-  }
-  difference() {
-    let total = 0;
-    for (const num of this.retrieveTopNumbers()){
-      total += num;
-    }
-    for (const num of this.retrieveBottomNumbers()){
-      total -= num;
-    }
-    this.differences.push(total);
   }
 }
