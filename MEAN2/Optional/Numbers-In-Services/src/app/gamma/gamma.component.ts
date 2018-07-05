@@ -7,26 +7,20 @@ import { TaskService } from '../task.service';
   styleUrls: ['./gamma.component.css']
 })
 export class GammaComponent implements OnInit {
-  numbers: number[] = [];
+  numbers: number = 0;
 
   constructor(private _taskService: TaskService) { }
 
   ngOnInit() {
-    this._taskService.differences.subscribe( (differences) => {
+    this._taskService.differences$.subscribe( (differences) => {
       this.numbers = differences;
     });
   }
 
   difference(event: Event) {
     event.preventDefault();
-    let total: number = 0;
-    for (const num of this._taskService.retrieveTopNumbers()){
-      total += num;
-    }
-    for (const num of this._taskService.retrieveBottomNumbers()){
-      total -= num;
-    }
-    this._taskService.differences.next([...this.numbers, total]);
+    console.log("In difference function");
+    this._taskService.difference();
   }
 
 }
