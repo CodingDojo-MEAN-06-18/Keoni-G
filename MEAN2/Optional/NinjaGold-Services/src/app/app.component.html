@@ -1,0 +1,10 @@
+<div class="gold">
+  <h1>Gold Count: {{ gold }}</h1>
+</div>
+<ul class="locations">
+  <li class="location"><app-location [location]="'Farm'" [start]='2' [end]='5'></app-location></li>
+  <li class="location"><app-location [location]="'Cave'" [start]='5' [end]='10'></app-location></li>
+  <li class="location"><app-location [location]="'Casino'" [start]='-100' [end]='100'></app-location></li>
+  <li class="location"><app-location [location]="'House'" [start]='7' [end]='15'></app-location></li>
+</ul>
+<app-log></app-log>

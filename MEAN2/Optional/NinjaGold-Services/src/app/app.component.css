@@ -1,0 +1,14 @@
+.gold, ul {
+    border: 2px solid black;
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+    padding: 0;
+    padding-bottom: 20px;
+}
+
+li {
+    width: 24%;
+    display: inline-block;
+}
+
