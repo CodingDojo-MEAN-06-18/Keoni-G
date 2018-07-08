@@ -1,0 +1,13 @@
+<div class="nav">
+  <h1>Dojo Weather</h1>
+  <ul>
+    <li><a (click)="getCity($event, 'seattle')" [routerLink]="'seattle'">Seattle, WA</a></li>
+    <li><a (click)="getCity($event, 'burbank')" [routerLink]="'burbank'">Burbank, CA</a></li>
+    <li><a (click)="getCity($event, 'san jose')" [routerLink]="'san jose'">San Jose, CA</a></li>
+    <li><a (click)="getCity($event, 'dallas')" [routerLink]="'dallas'">Dallas, TX</a></li>
+    <li><a (click)="getCity($event, 'washington,d.c.')" [routerLink]="'washington,d.c.'">Washington, D.C.</a></li>
+    <li><a (click)="getCity($event, 'chicago')" [routerLink]="'chicago'">Chicago, IL</a></li>
+  </ul>
+</div>
+<router-outlet></router-outlet>
+
