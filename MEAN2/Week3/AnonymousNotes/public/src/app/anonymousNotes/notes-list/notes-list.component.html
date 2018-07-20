@@ -1,0 +1,8 @@
+<ul id="notes-container">
+  <li class="card-panel teal" *ngFor="let note of notes">
+    <div class="card-content white-text">
+      <p>{{ note.note }}</p>
+      <p>Noted on: {{ note.date | date:'medium' }}</p>
+    </div>
+  </li>
+</ul>

@@ -1,0 +1,12 @@
+ul#notes-container {
+    border: 2px solid teal;
+    overflow-y: auto;
+    height: 60vh;
+}
+
+li.card-panel {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
