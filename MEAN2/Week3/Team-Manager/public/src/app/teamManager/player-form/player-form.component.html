@@ -1,0 +1,15 @@
+<h4>Add Player</h4>
+<form action="" (submit)="onSubmit($event, playerForm)" #playerForm="ngForm">
+  <div class="input-field">
+    <input type="text" name="name" [(ngModel)]="name" #inputName="ngModel" minlength="3" required>
+    <label for="name">Player Name</label>
+    <span class="error" *ngIf="inputName.touched && !inputName.valid">Player name must be longer than 2 characters</span>
+  </div>
+  <label for="position">Preferred Position</label>
+  <select class="browser-default" name="position" [(ngModel)]="position" placeholder="Choose position..." #inputPosition="ngModel" required>
+    <option *ngFor="let position of positions" value="{{ position | lowercase }}">{{ position }}</option>
+  </select>
+  <span class="error" *ngIf="inputPosition.touched && !inputPosition.valid">Please choose a preferred position for the player</span>
+
+  <button type="submit" [disabled]="playerForm.invalid" class="waves-effect waves-light btn">ADD PLAYER</button>
+</form>

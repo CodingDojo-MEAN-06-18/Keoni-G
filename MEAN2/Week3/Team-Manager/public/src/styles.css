@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    width: 75vw;
+    margin: 0 auto;
+}
+
+#manager,
+#player-manager,
+#status-manager {
+    border: 2px solid black;
+    padding: 20px;
+    margin: 20px;
+    height: 100%;
+}

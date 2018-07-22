@@ -1,0 +1,14 @@
+<table class="highlight">
+  <tr>
+    <th>Player Name</th>
+    <th>Status</th>
+  </tr>
+  <tr *ngFor="let player of players">
+    <td>{{ player.name }}</td>
+    <td>
+      <button (click)='onClick($event, player._id, 1)' [ngStyle]="{ 'background-color': player.status[current] !== 1 ? 'white' : 'green' }" class="waves-effect waves-light btn">Playing</button>
+      <button (click)='onClick($event, player._id, -1)' [ngStyle]="{ 'background-color': player.status[current] !== -1 ? 'white' : 'red' }" class="waves-effect waves-light btn">Not Playing</button>
+      <button (click)='onClick($event, player._id, 0)' [ngStyle]="{ 'background-color': player.status[current] !== 0 ? 'white' : 'yellow' }" class="waves-effect waves-light btn">Undecided</button>
+    </td>
+  </tr>
+</table>

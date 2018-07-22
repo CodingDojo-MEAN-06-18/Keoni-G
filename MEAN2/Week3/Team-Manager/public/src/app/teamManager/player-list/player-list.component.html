@@ -1,0 +1,26 @@
+<table class="highlight">
+  <tr>
+    <th>Player Name</th>
+    <th>Preferred Position</th>
+    <th>Actions</th>
+  </tr>
+  <tr *ngFor="let player of players">
+    <td>{{ player.name }}</td>
+    <td>{{ player.preferredPosition | uppercase}}</td>
+    <td>
+      <button (click)="openModal($event, player)" data-target="modal1" class="waves-effect waves-light btn modal-trigger">Delete</button>
+      <!--{{ player.name }}-->
+    </td>
+  </tr>
+</table>
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Confirm Deletion</h4>
+    <p>Are you sure you want to delete {{ currentPlayer.name }}?</p>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-close waves-effect waves-red btn-flat">No</a>
+    <a (click)="deletePlayer($event, currentPlayer._id)" class="modal-close waves-effect waves-green btn-flat">Yes</a>
+  </div>
+</div>
