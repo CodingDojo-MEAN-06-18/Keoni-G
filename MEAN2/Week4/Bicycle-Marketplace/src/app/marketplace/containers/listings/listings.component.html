@@ -1,0 +1,11 @@
+<section>
+  <app-bike-form [create]="true"></app-bike-form>
+</section>
+
+<section>
+  <ul>
+    <li *ngFor='let bike of bikes'>
+      <app-bike-form (createdBike)="onCreate($event, bike)" (deleteBike)="onDelete($event, bike)" [bike]="bike" [create]="false"></app-bike-form>
+    </li>
+  </ul>
+</section>

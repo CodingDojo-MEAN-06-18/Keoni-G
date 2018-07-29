@@ -1,0 +1,9 @@
+.bike-container{
+    border: 2px solid black;
+    margin-top: 20px;
+}
+
+.image img {
+    width: 100%;
+    line-height: 200%;
+}

@@ -1,0 +1,11 @@
+<section>
+  <div class="input-field">
+    <label for="">Search</label>
+    <input [(ngModel)]="searchText" type="text">
+  </div>
+  <ul>
+    <li *ngFor='let bike of bikes | filter: searchText'>
+      <app-bike (deleteBike)="onDelete($event, bike)" [bike]="bike"></app-bike>
+    </li>
+  </ul>
+</section>

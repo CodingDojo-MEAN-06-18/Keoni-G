@@ -1,0 +1,17 @@
+<nav>
+  <ul>
+    <li>
+      <a routerLink="/browse">Browse</a>
+    </li>
+
+    <li>
+      <a routerLink="/listings">My Listings</a>
+    </li>
+
+    <li *ngIf='loggedIn'>
+      <a (click)=logout()>
+        Logout
+      </a>
+    </li>
+  </ul>
+</nav>
